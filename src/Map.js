@@ -21,6 +21,7 @@ export default class Map extends React.Component {
             markerClicked: false,
             searchText: "",
             distance: 40,
+            loading: true, //Adiciona estado de carregamento
         }
     }
 
@@ -31,11 +32,13 @@ export default class Map extends React.Component {
                 this.setState({
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
-                    studios: studiosData
+                    studios: studiosData,
+                    loading: false, // Desativa o estado de carregamento
                 })
             },
             (error) => {
                 console.log("Error Getting Location: " + error.message)
+                this.setState({ loading: false }); // Desativa o estado de carregamento mesmo em caso de erro
             }
         )
     }
@@ -146,8 +149,8 @@ export default class Map extends React.Component {
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyA3vWsUD1LyJ3oGEKf7M5mKFCTFcf6mTo4" }}
                     defaultCenter={{
-                        lat: 10.99835602,
-                        lng: 77.01502627
+                        lat: -27.596922784112,  
+                        lng: -48.549881542308704,
                     }}
                     defaultZoom={14}
                     center={{lat: this.state.latitude,
@@ -196,6 +199,12 @@ export default class Map extends React.Component {
     }
 
     render() {
+        // Se estiver carregando, mostra um indicador de carregamento
+    if (this.state.loading) {
+        return <div>Loading...</div>;
+    }
+
+        // Quando não estiver mais carregando, renderiza o mapa e o cabeçalho normalmente    
         return (
             <div style={{ backgroundColor: "#BC90CE" }}>
                 {this.header()}
