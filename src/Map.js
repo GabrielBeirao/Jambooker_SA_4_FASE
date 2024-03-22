@@ -147,7 +147,7 @@ export default class Map extends React.Component {
 
             <div style={{ height: '80vh' }}>
                 <GoogleMapReact
-                    bootstrapURLKeys={{ key: "AIzaSyA3vWsUD1LyJ3oGEKf7M5mKFCTFcf6mTo4" }}
+                    bootstrapURLKeys={{ key: "" }}
                     defaultCenter={{
                         lat: -27.596922784112,  
                         lng: -48.549881542308704,
